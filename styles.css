@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+#app_container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 60%;
+    padding: 2.5%;
+    background-color: gray;
+}
+#plusbutton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+}
+#deletebutton {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+}
+#people_container {
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    border-top: 1px solid black;
+    overflow-x: auto;
+}
+.person_div {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+.person_div * {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    margin: 10px;
+}
+.person_div button {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 10%;
+}
+#app_title {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+#random_container {
+    position: fixed;
+    bottom: -6%;
+}
+#createdBy {
+    position: fixed;
+    right: 10px;
+    bottom: 0;
+    font-size: 10px;
+}

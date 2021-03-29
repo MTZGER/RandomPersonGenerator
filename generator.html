@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Person Generator</title>
+        <link href="styles.css" rel="stylesheet">
+        <script>
+            class PeopleList {
+                constructor() {
+                    this.checkLocalStorage = () => {
+                        if (localStorage.getItem("peopleList"))
+                            try {
+                                return JSON.parse(localStorage.getItem("peopleList"))
+                            } catch (err) {
+                                alert("Error")
+                                localStorage.setItem("peopleList", [])
+                                return []
+                            }
+                        else
+                            return []
+                    }
+                    this.state = {
+                        peopleList: this.checkLocalStorage(),
+                    }
+                }
+                getList = () => (
+                    peopleList
+                )
+                refreshList = () => {
+                    localStorage.setItem("peopleList", JSON.stringify(this.state.peopleList))
+                    let outputList = "";
+                    this.state.peopleList.forEach(person => {
+                        outputList += `<div class="person_div"><h5>${person}</h5><button onClick='peopleList.deletePerson("${person}")'>x</button></div>`;
+                    })
+                    document.querySelector("#people_container").innerHTML = outputList;
+                }
+                addPerson = () => {
+                    if (person in this.state.peopleList) {
+                        alert("This name already exists!");
+                    } else {
+                        var person = prompt("Enter your name: ");
+                        if (person == "" || person == null) return
+                        this.state.peopleList.push(person);
+                    }
+
+                    this.refreshList()
+                }
+                deletePerson = delPerson => {
+                    this.state.peopleList = this.state.peopleList.filter(person => person!==delPerson)
+
+                    this.refreshList()
+                }
+                generatePerson = (component) => {
+                    var randomPerson = this.state.peopleList[Math.floor(Math.random() * this.state.peopleList.length)]
+                    document.querySelector(component).innerHTML = randomPerson
+                }
+            }
+            
+            const peopleList = new PeopleList;
+            function addPerson() {
+                peopleList.addPerson()
+            }
+            function generatePerson() {
+                peopleList.generatePerson("#generated_person")
+            }
+            document.addEventListener("DOMContentLoaded", () => {
+                peopleList.refreshList()
+            })
+        </script>
+    </head>
+    <body>
+        <div id="app_container">
+            <h3 id="app_title">Names</h3>
+            <button id="deletebutton" onClick="localStorage.setItem('peopleList', []); alert('Reopen this window!');">DELETE ALL</button>
+            <button id="plusbutton" onClick="addPerson()">+</button>
+            <div id="people_container"></div>
+            <div id="random_container"><button onClick="generatePerson()">Generate person:</button> <strong id="generated_person"></strong></div>
+        </div>
+        <p id="createdBy">created by mtzger</p>
+    </body>
+</html>
